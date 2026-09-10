@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Study Materials | EduLMS</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+Edu<span>LMS</span>
+</div>
+
+<div class="nav-links">
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="profile.html">Profile</a>
+
+<a href="courses.html">Courses</a>
+
+<a href="assignments.html">Assignments</a>
+
+<a href="materials.html">Materials</a>
+
+<button
+onclick="logout()"
+class="login-btn"
+style="border:none;"
+>
+Logout
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<section class="features">
+
+<h1>📖 Study Materials</h1>
+
+<br>
+
+<p>
+Access your learning resources and study materials.
+</p>
+
+<br>
+
+
+<div class="feature-container">
+
+
+<div class="feature-card">
+
+<h3>💻 Web Development</h3>
+
+<p>
+HTML, CSS, JavaScript and basic web development notes.
+</p>
+
+<a href="#">
+View Material
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>🗄️ Database Management</h3>
+
+<p>
+Database concepts, SQL and database management notes.
+</p>
+
+<a href="#">
+View Material
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>🖥️ Operating Systems</h3>
+
+<p>
+Process management, scheduling and operating system notes.
+</p>
+
+<a href="#">
+View Material
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📊 Data Structures</h3>
+
+<p>
+Arrays, linked lists, stacks, queues and other study resources.
+</p>
+
+<a href="#">
+View Material
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>🤖 Artificial Intelligence</h3>
+
+<p>
+Introduction to AI, machine learning and intelligent systems.
+</p>
+
+<a href="#">
+View Material
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📚 General Study Resources</h3>
+
+<p>
+Additional notes and resources for your academic studies.
+</p>
+
+<a href="#">
+View Material
+</a>
+
+</div>
+
+
+</div>
+
+<br><br>
+
+<a href="dashboard.html" class="btn">
+← Back to Dashboard
+</a>
+
+</section>
+
+
+<script>
+
+const token =
+localStorage.getItem("token");
+
+const student =
+JSON.parse(localStorage.getItem("student"));
+
+if (!token || !student) {
+
+window.location.href = "login.html";
+
+}
+
+
+function logout() {
+
+localStorage.removeItem("token");
+
+localStorage.removeItem("student");
+
+window.location.href = "login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

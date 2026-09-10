@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Student Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+Edu<span>LMS</span>
+</div>
+
+<div class="nav-links">
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="profile.html">Profile</a>
+
+<a href="courses.html">Courses</a>
+
+<a href="assignments.html">Assignments</a>
+
+<a href="materials.html">Materials</a>
+
+<button
+onclick="logout()"
+class="login-btn"
+style="border:none;"
+>
+Logout
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<section class="features">
+
+<h1>
+Welcome, <span id="studentName"></span> 👋
+</h1>
+
+<br>
+
+<p>
+This is your personal LMS dashboard.
+</p>
+
+<br>
+
+
+<div class="feature-container">
+
+
+<div class="feature-card">
+
+<h3>📚 My Courses</h3>
+
+<p>
+View your enrolled courses.
+</p>
+
+<a href="courses.html">
+View Courses
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📝 Assignments</h3>
+
+<p>
+Check your assignments and academic tasks.
+</p>
+
+<a href="assignments.html">
+View Assignments
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📖 Study Materials</h3>
+
+<p>
+Access your learning resources.
+</p>
+
+<a href="materials.html">
+View Materials
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📊 Attendance</h3>
+
+<p>
+Check your attendance information.
+</p>
+
+<a href="attendance.html">
+View Attendance
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📢 Notices</h3>
+
+<p>
+View important college announcements.
+</p>
+
+<a href="notices.html">
+View Notices
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📋 LMS Survey</h3>
+
+<p>
+Share your perception of LMS.
+</p>
+
+<a href="survey.html">
+Take Survey
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<script>
+
+const student =
+JSON.parse(localStorage.getItem("student"));
+
+const token =
+localStorage.getItem("token");
+
+
+if(!token || !student) {
+
+window.location.href =
+"login.html";
+
+}
+
+
+document.getElementById("studentName")
+.textContent = student.name;
+
+
+function logout() {
+
+localStorage.removeItem("token");
+
+localStorage.removeItem("student");
+
+window.location.href =
+"login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

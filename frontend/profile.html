@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Student Profile</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+Edu<span>LMS</span>
+</div>
+
+<div class="nav-links">
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="profile.html">Profile</a>
+
+<a href="courses.html">Courses</a>
+
+<a href="assignments.html">Assignments</a>
+
+<a href="materials.html">Materials</a>
+
+<button
+onclick="logout()"
+class="login-btn"
+style="border:none;"
+>
+Logout
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<section class="features">
+
+<h1>👤 Student Profile</h1>
+
+<br>
+
+<div class="feature-card"
+style="max-width:500px;margin:auto;">
+
+<h2 id="studentName">Student</h2>
+
+<br>
+
+<p>
+<strong>Email:</strong>
+<span id="studentEmail"></span>
+</p>
+
+<br>
+
+<p>
+<strong>Account Type:</strong>
+Student
+</p>
+
+<br>
+
+<p>
+<strong>Status:</strong>
+Active
+</p>
+
+<br>
+
+<a href="dashboard.html">
+← Back to Dashboard
+</a>
+
+</div>
+
+</section>
+
+
+<script>
+
+const student =
+JSON.parse(localStorage.getItem("student"));
+
+const token =
+localStorage.getItem("token");
+
+
+if (!token || !student) {
+
+    window.location.href = "login.html";
+
+}
+
+
+document.getElementById("studentName")
+.textContent = student.name;
+
+
+document.getElementById("studentEmail")
+.textContent = student.email;
+
+
+function logout() {
+
+    localStorage.removeItem("token");
+
+    localStorage.removeItem("student");
+
+    window.location.href = "login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
