@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Student Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<section class="features">
+
+<div class="feature-card"
+style="max-width:450px;margin:auto;">
+
+<h1>🎓 Student Login</h1>
+
+<br>
+
+<form id="loginForm">
+
+<input
+id="email"
+type="email"
+placeholder="Student Email"
+required
+style="width:100%;padding:13px;margin:8px 0;"
+>
+
+<input
+id="password"
+type="password"
+placeholder="Password"
+required
+style="width:100%;padding:13px;margin:8px 0;"
+>
+
+<button
+type="submit"
+class="login-btn"
+style="border:none;padding:13px 25px;margin-top:15px;"
+>
+Login
+</button>
+
+</form>
+
+<br>
+
+<p id="message"></p>
+
+<br>
+
+<p>
+Don't have an account?
+</p>
+
+<br>
+
+<a href="register.html">
+Create Student Account
+</a>
+
+<br><br>
+
+<a href="index.html">
+← Back to Home
+</a>
+
+</div>
+
+</section>
+
+
+<script>
+
+const API_URL = "http://localhost:3000";
+
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const email =
+        document.getElementById("email").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = "Logging in...";
+
+
+    try {
+
+        const response = await fetch(
+            API_URL + "/api/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (response.ok) {
+
+            // Save login information
+            localStorage.setItem(
+                "token",
+                data.token
+            );
+
+            localStorage.setItem(
+                "student",
+                JSON.stringify(data.student)
+            );
+
+
+            message.textContent =
+                "Login successful! Opening dashboard...";
+
+
+            // Open dashboard
+            setTimeout(function() {
+
+                window.location.href =
+                    "dashboard.html";
+
+            }, 500);
+
+
+        } else {
+
+            message.textContent =
+                data.message;
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Unable to connect to server. Please make sure the backend is running.";
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Assignments | EduLMS</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+Edu<span>LMS</span>
+</div>
+
+<div class="nav-links">
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="profile.html">Profile</a>
+
+<a href="courses.html">Courses</a>
+
+<a href="assignments.html">Assignments</a>
+
+<a href="materials.html">Materials</a>
+
+<button
+onclick="logout()"
+class="login-btn"
+style="border:none;"
+>
+Logout
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<section class="features">
+
+<h1>📝 Assignments</h1>
+
+<br>
+
+<p>
+Welcome, <strong id="studentName"></strong>!
+</p>
+
+<br>
+
+
+<div class="feature-container">
+
+
+<div class="feature-card">
+
+<h3>💻 Web Development</h3>
+
+<p>
+Create a basic HTML and CSS webpage.
+</p>
+
+<p>
+<strong>Due Date:</strong> 15 September 2026
+</p>
+
+<p>
+<strong>Status:</strong> Pending
+</p>
+
+<br>
+
+<button class="login-btn"
+style="border:none;padding:10px 20px;">
+View Assignment
+</button>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>🗄️ Database Management</h3>
+
+<p>
+Prepare a short report on database management systems.
+</p>
+
+<p>
+<strong>Due Date:</strong> 18 September 2026
+</p>
+
+<p>
+<strong>Status:</strong> Pending
+</p>
+
+<br>
+
+<button class="login-btn"
+style="border:none;padding:10px 20px;">
+View Assignment
+</button>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📊 Learning Management System</h3>
+
+<p>
+Write your perception about using LMS in higher education.
+</p>
+
+<p>
+<strong>Due Date:</strong> 20 September 2026
+</p>
+
+<p>
+<strong>Status:</strong> Not Started
+</p>
+
+<br>
+
+<button class="login-btn"
+style="border:none;padding:10px 20px;">
+View Assignment
+</button>
+
+</div>
+
+
+</div>
+
+<br><br>
+
+<a href="dashboard.html">
+← Back to Dashboard
+</a>
+
+</section>
+
+
+<script>
+
+const student =
+JSON.parse(localStorage.getItem("student"));
+
+const token =
+localStorage.getItem("token");
+
+
+if (!token || !student) {
+
+    window.location.href = "login.html";
+
+}
+
+
+document.getElementById("studentName")
+.textContent = student.name;
+
+
+function logout() {
+
+    localStorage.removeItem("token");
+
+    localStorage.removeItem("student");
+
+    window.location.href = "login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

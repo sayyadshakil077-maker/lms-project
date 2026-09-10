@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>LMS Notices</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+Edu<span>LMS</span>
+</div>
+
+<div class="nav-links">
+
+<a href="dashboard.html">Dashboard</a>
+
+<a href="profile.html">Profile</a>
+
+<a href="courses.html">Courses</a>
+
+<a href="assignments.html">Assignments</a>
+
+<a href="materials.html">Materials</a>
+
+<button
+onclick="logout()"
+class="login-btn"
+style="border:none;"
+>
+Logout
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<section class="features">
+
+<h1>📢 Important Notices</h1>
+
+<br>
+
+<p>
+Stay updated with important LMS and college announcements.
+</p>
+
+<br>
+
+
+<div class="feature-container">
+
+
+<div class="feature-card">
+
+<h3>📚 Semester Examination</h3>
+
+<p>
+Students are advised to check the examination schedule
+and prepare accordingly.
+</p>
+
+<small>
+Posted by LMS Administration
+</small>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📝 Assignment Submission</h3>
+
+<p>
+Please submit your pending assignments before the
+specified deadline.
+</p>
+
+<small>
+Posted by Faculty
+</small>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>🎓 LMS Survey</h3>
+
+<p>
+Students are requested to participate in the LMS
+Perception Survey.
+</p>
+
+<a href="survey.html">
+Take Survey
+</a>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📢 College Announcement</h3>
+
+<p>
+Check the LMS regularly for new academic announcements,
+events and updates.
+</p>
+
+<small>
+Posted by College Administration
+</small>
+
+</div>
+
+
+</div>
+
+<br>
+
+<a href="dashboard.html">
+← Back to Dashboard
+</a>
+
+</section>
+
+
+<script>
+
+function logout() {
+
+    localStorage.removeItem("token");
+
+    localStorage.removeItem("student");
+
+    window.location.href = "login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
