@@ -2,15 +2,12 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Student Registration</title>
 
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -50,13 +47,16 @@ required
 style="width:100%;padding:13px;margin:8px 0;"
 >
 
-
 <select
-id="course"    
+id="course"
 required
 style="width:100%;padding:13px;margin:8px 0;"
 >
-<option value="course">Select Your Course</option>
+
+<option value="" selected disabled>
+Select Your Course
+</option>
+
 <option value="BSc.IT">BSc.IT</option>
 <option value="BSc.DS">BSc.DS</option>
 <option value="BMS">BMS</option>
@@ -64,6 +64,7 @@ style="width:100%;padding:13px;margin:8px 0;"
 <option value="BBI">BBI</option>
 <option value="BAF">BAF</option>
 <option value="Other">Other</option>
+
 </select>
 
 <button
@@ -123,7 +124,7 @@ document
         document.getElementById("password").value;
 
     const course =
-    document.getElementById("course").value;
+        document.getElementById("course").value;
 
     const message =
         document.getElementById("message");
@@ -142,12 +143,13 @@ document
                 },
 
                 body: JSON.stringify({
-                     name: name,
-                     email: email,
-                     password: password,
-                     course: course
-})
-})
+                    name: name,
+                    email: email,
+                    password: password,
+                    course: course
+                })
+            }
+        );
 
         const data =
             await response.json();
