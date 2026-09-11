@@ -5,7 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Study Materials | EduLMS</title>
 
@@ -57,6 +58,16 @@ Logout
 <br>
 
 <p>
+Welcome, <strong id="studentName"></strong>!
+</p>
+
+<p>
+Course: <strong id="studentCourse"></strong>
+</p>
+
+<br>
+
+<p>
 Access your learning resources and study materials.
 </p>
 
@@ -64,6 +75,13 @@ Access your learning resources and study materials.
 
 
 <div class="feature-container">
+
+
+<!-- ========================= -->
+<!-- BSc.IT STUDY MATERIALS -->
+<!-- ========================= -->
+
+<div id="bscitMaterials">
 
 
 <div class="feature-card">
@@ -86,7 +104,7 @@ View Material
 <h3>🗄️ Database Management</h3>
 
 <p>
-Database concepts, SQL and database management notes.
+Database concepts, SQL, DBMS and database management notes.
 </p>
 
 <a href="#">
@@ -101,7 +119,7 @@ View Material
 <h3>🖥️ Operating Systems</h3>
 
 <p>
-Process management, scheduling and operating system notes.
+Process management, scheduling algorithms and operating system notes.
 </p>
 
 <a href="#">
@@ -116,7 +134,7 @@ View Material
 <h3>📊 Data Structures</h3>
 
 <p>
-Arrays, linked lists, stacks, queues and other study resources.
+Arrays, linked lists, stacks, queues and other data structure resources.
 </p>
 
 <a href="#">
@@ -128,10 +146,10 @@ View Material
 
 <div class="feature-card">
 
-<h3>🤖 Artificial Intelligence</h3>
+<h3>🌐 Computer Networks</h3>
 
 <p>
-Introduction to AI, machine learning and intelligent systems.
+Networking concepts, protocols, network types and communication notes.
 </p>
 
 <a href="#">
@@ -143,10 +161,10 @@ View Material
 
 <div class="feature-card">
 
-<h3>📚 General Study Resources</h3>
+<h3>⚙️ Software Engineering</h3>
 
 <p>
-Additional notes and resources for your academic studies.
+Software development life cycle, models and software engineering notes.
 </p>
 
 <a href="#">
@@ -157,6 +175,32 @@ View Material
 
 
 </div>
+
+
+<!-- ========================= -->
+<!-- OTHER COURSES -->
+<!-- ========================= -->
+
+<div
+id="otherCourse"
+style="display:none;"
+>
+
+<div class="feature-card">
+
+<h3>📚 Course Materials</h3>
+
+<p>
+Study materials for your selected course will be available here.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
 
 <br><br>
 
@@ -175,20 +219,60 @@ localStorage.getItem("token");
 const student =
 JSON.parse(localStorage.getItem("student"));
 
+
+/* Check Login */
+
 if (!token || !student) {
 
-window.location.href = "login.html";
+    window.location.href =
+    "login.html";
 
 }
 
 
+/* Show Student Name */
+
+document.getElementById("studentName")
+.textContent = student.name;
+
+
+/* Show Student Course */
+
+document.getElementById("studentCourse")
+.textContent = student.course;
+
+
+/* Course Based Materials */
+
+if (student.course === "BSc.IT") {
+
+    document.getElementById("bscitMaterials")
+    .style.display = "block";
+
+    document.getElementById("otherCourse")
+    .style.display = "none";
+
+} else {
+
+    document.getElementById("bscitMaterials")
+    .style.display = "none";
+
+    document.getElementById("otherCourse")
+    .style.display = "block";
+
+}
+
+
+/* Logout */
+
 function logout() {
 
-localStorage.removeItem("token");
+    localStorage.removeItem("token");
 
-localStorage.removeItem("student");
+    localStorage.removeItem("student");
 
-window.location.href = "login.html";
+    window.location.href =
+    "login.html";
 
 }
 
