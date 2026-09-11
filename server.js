@@ -25,6 +25,7 @@ db.prepare(`
         name TEXT NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
+        course TEXT NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 `).run();
@@ -51,9 +52,9 @@ app.post("/api/register", async (req, res) => {
 
     try {
 
-        const { name, email, password } = req.body;
+        const { name, email, password, course } = req.body;
 
-        if (!name || !email || !password) {
+        if (!name || !email || !password || !course) {
 
             return res.status(400).json({
                 message: "Please fill all fields."
@@ -78,12 +79,13 @@ app.post("/api/register", async (req, res) => {
 
         const result = db.prepare(`
             INSERT INTO students
-            (name, email, password)
-            VALUES (?, ?, ?)
+            (name, email, password, course)
+            VALUES (?, ?, ?, ?)
         `).run(
             name,
             email,
-            hashedPassword
+            hashedPassword,
+            course
         );
 
         res.status(201).json({
@@ -93,7 +95,8 @@ app.post("/api/register", async (req, res) => {
             student: {
                 id: result.lastInsertRowid,
                 name: name,
-                email: email
+                email: email,
+                course: course
             }
 
         });
@@ -175,7 +178,8 @@ app.post("/api/login", async (req, res) => {
             student: {
                 id: student.id,
                 name: student.name,
-                email: student.email
+                email: student.email,
+                course: student.course
             }
 
         });
@@ -197,7 +201,7 @@ app.post("/api/login", async (req, res) => {
 // START SERVER
 // ===============================
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, () => {
 
     console.log(
         `LMS Backend running at http://localhost:${PORT}`
