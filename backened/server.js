@@ -6,7 +6,7 @@ const Database = require("better-sqlite3");
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const JWT_SECRET = "lms_project_secret_2026";
 
 app.use(cors());
@@ -197,7 +197,7 @@ app.post("/api/login", async (req, res) => {
 // START SERVER
 // ===============================
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
 
     console.log(
         `LMS Backend running at http://localhost:${PORT}`
