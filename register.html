@@ -122,6 +122,9 @@ document
     const password =
         document.getElementById("password").value;
 
+    const course =
+    document.getElementById("course").value;
+
     const message =
         document.getElementById("message");
 
@@ -139,12 +142,12 @@ document
                 },
 
                 body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    password: password
-                })
-            }
-        );
+                     name: name,
+                     email: email,
+                     password: password,
+                     course: course
+})
+})
 
         const data =
             await response.json();
