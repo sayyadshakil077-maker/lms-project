@@ -57,6 +57,10 @@ Logout
 Welcome, <span id="studentName"></span> 👋
 </h1>
 
+<p>
+Course: <strong id="studentCourse"></strong>
+</p>
+
 <br>
 
 <p>
@@ -183,6 +187,9 @@ window.location.href =
 
 document.getElementById("studentName")
 .textContent = student.name;
+
+document.getElementById("studentCourse")
+.textContent = student.course;
 
 
 function logout() {
