@@ -2,8 +2,11 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Attendance | EduLMS</title>
 
@@ -89,69 +92,181 @@ Logout
 <br>
 
 <p>
+Student: <strong id="studentName"></strong>
+</p>
+
+<p>
+Course: <strong id="studentCourse"></strong>
+</p>
+
+<br>
+
+<p>
 Check your attendance for each subject.
 </p>
 
+
+<!-- ========================= -->
+<!-- BSc.IT ATTENDANCE -->
+<!-- ========================= -->
+
+<div id="bscitAttendance">
 
 <table class="attendance-table">
 
 <thead>
 
 <tr>
+
 <th>Subject</th>
+
 <th>Total Classes</th>
+
 <th>Present</th>
+
 <th>Absent</th>
+
 <th>Attendance</th>
+
 </tr>
 
 </thead>
 
+
 <tbody>
 
+
 <tr>
+
 <td>Web Development</td>
+
 <td>40</td>
+
 <td>35</td>
+
 <td>5</td>
+
 <td class="good">87.5%</td>
+
 </tr>
 
+
 <tr>
+
 <td>Database Management</td>
+
 <td>35</td>
+
 <td>30</td>
+
 <td>5</td>
+
 <td class="good">85.7%</td>
+
 </tr>
 
-<tr>
-<td>Field Project</td>
-<td>30</td>
-<td>30</td>
-<td>0</td>
-<td class="good">100%</td>
-</tr>
 
 <tr>
-<td>Operating System</td>
+
+<td>Computer Networks</td>
+
 <td>30</td>
+
+<td>25</td>
+
+<td>5</td>
+
+<td class="good">83.3%</td>
+
+</tr>
+
+
+<tr>
+
+<td>Operating Systems</td>
+
+<td>30</td>
+
 <td>24</td>
+
 <td>6</td>
+
 <td class="good">80%</td>
+
+</tr>
+
+
+<tr>
+
+<td>Data Structures</td>
+
+<td>32</td>
+
+<td>24</td>
+
+<td>8</td>
+
+<td class="warning">75%</td>
+
 </tr>
 
 <tr>
-<td>Data Structures</td>
-<td>32</td>
-<td>24</td>
-<td>8</td>
-<td class="warning">75%</td>
+
+<td>Field Work</td>
+
+<td>30</td>
+
+<td>30</td>
+
+<td>0</td>
+
+<td class="good">100%</td>
+
 </tr>
+
+<tr>
+
+<td>Software Engineering</td>
+
+<td>28</td>
+
+<td>24</td>
+
+<td>4</td>
+
+<td class="good">85.7%</td>
+
+</tr>
+
 
 </tbody>
 
 </table>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- OTHER COURSES -->
+<!-- ========================= -->
+
+<div
+id="otherCourse"
+style="display:none;"
+>
+
+<div class="feature-card">
+
+<h3>📊 Attendance</h3>
+
+<p>
+Attendance information for your selected course
+will be available here.
+</p>
+
+</div>
+
+</div>
 
 
 <br>
@@ -171,12 +286,51 @@ JSON.parse(localStorage.getItem("student"));
 const token =
 localStorage.getItem("token");
 
+
+/* Check Login */
+
 if (!token || !student) {
 
-    window.location.href = "login.html";
+    window.location.href =
+    "login.html";
 
 }
 
+
+/* Show Student Name */
+
+document.getElementById("studentName")
+.textContent = student.name;
+
+
+/* Show Student Course */
+
+document.getElementById("studentCourse")
+.textContent = student.course;
+
+
+/* Course Based Attendance */
+
+if (student.course === "BSc.IT") {
+
+    document.getElementById("bscitAttendance")
+    .style.display = "block";
+
+    document.getElementById("otherCourse")
+    .style.display = "none";
+
+} else {
+
+    document.getElementById("bscitAttendance")
+    .style.display = "none";
+
+    document.getElementById("otherCourse")
+    .style.display = "block";
+
+}
+
+
+/* Logout */
 
 function logout() {
 
@@ -184,7 +338,8 @@ function logout() {
 
     localStorage.removeItem("student");
 
-    window.location.href = "login.html";
+    window.location.href =
+    "login.html";
 
 }
 
