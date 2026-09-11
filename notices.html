@@ -58,6 +58,16 @@ Logout
 <br>
 
 <p>
+Welcome, <strong id="studentName"></strong>!
+</p>
+
+<p>
+Course: <strong id="studentCourse"></strong>
+</p>
+
+<br>
+
+<p>
 Stay updated with important LMS and college announcements.
 </p>
 
@@ -67,13 +77,20 @@ Stay updated with important LMS and college announcements.
 <div class="feature-container">
 
 
+<!-- ========================= -->
+<!-- BSc.IT NOTICES -->
+<!-- ========================= -->
+
+<div id="bscitNotices">
+
+
 <div class="feature-card">
 
-<h3>📚 Semester Examination</h3>
+<h3>📚 BSc.IT Semester Examination</h3>
 
 <p>
-Students are advised to check the examination schedule
-and prepare accordingly.
+BSc.IT students are advised to check the semester
+examination schedule and prepare accordingly.
 </p>
 
 <small>
@@ -85,11 +102,11 @@ Posted by LMS Administration
 
 <div class="feature-card">
 
-<h3>📝 Assignment Submission</h3>
+<h3>📝 BSc.IT Assignment Submission</h3>
 
 <p>
-Please submit your pending assignments before the
-specified deadline.
+BSc.IT students should submit their pending assignments
+before the specified deadlines.
 </p>
 
 <small>
@@ -101,11 +118,43 @@ Posted by Faculty
 
 <div class="feature-card">
 
-<h3>🎓 LMS Survey</h3>
+<h3>💻 Web Development Notice</h3>
 
 <p>
-Students are requested to participate in the LMS
-Perception Survey.
+Students should complete their Web Development
+practical work and keep their assignments ready.
+</p>
+
+<small>
+Posted by Web Development Faculty
+</small>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>🗄️ Database Management Notice</h3>
+
+<p>
+Students should revise SQL queries, database concepts
+and DBMS topics for upcoming academic activities.
+</p>
+
+<small>
+Posted by Database Faculty
+</small>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>🎓 LMS Perception Survey</h3>
+
+<p>
+BSc.IT students are requested to participate in the
+LMS Perception Survey for the academic project.
 </p>
 
 <a href="survey.html">
@@ -121,7 +170,7 @@ Take Survey
 
 <p>
 Check the LMS regularly for new academic announcements,
-events and updates.
+events and important updates.
 </p>
 
 <small>
@@ -132,6 +181,33 @@ Posted by College Administration
 
 
 </div>
+
+
+<!-- ========================= -->
+<!-- OTHER COURSES -->
+<!-- ========================= -->
+
+<div
+id="otherCourse"
+style="display:none;"
+>
+
+<div class="feature-card">
+
+<h3>📢 Course Notices</h3>
+
+<p>
+Important notices for your selected course will be
+available here.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
 
 <br>
 
@@ -144,13 +220,66 @@ Posted by College Administration
 
 <script>
 
+const student =
+JSON.parse(localStorage.getItem("student"));
+
+const token =
+localStorage.getItem("token");
+
+
+/* Check Login */
+
+if (!token || !student) {
+
+    window.location.href =
+    "login.html";
+
+}
+
+
+/* Student Name */
+
+document.getElementById("studentName")
+.textContent = student.name;
+
+
+/* Student Course */
+
+document.getElementById("studentCourse")
+.textContent = student.course;
+
+
+/* Course Based Notices */
+
+if (student.course === "BSc.IT") {
+
+    document.getElementById("bscitNotices")
+    .style.display = "block";
+
+    document.getElementById("otherCourse")
+    .style.display = "none";
+
+} else {
+
+    document.getElementById("bscitNotices")
+    .style.display = "none";
+
+    document.getElementById("otherCourse")
+    .style.display = "block";
+
+}
+
+
+/* Logout */
+
 function logout() {
 
     localStorage.removeItem("token");
 
     localStorage.removeItem("student");
 
-    window.location.href = "login.html";
+    window.location.href =
+    "login.html";
 
 }
 
