@@ -61,10 +61,21 @@ Logout
 Welcome, <strong id="studentName"></strong>!
 </p>
 
+<p>
+Course: <strong id="studentCourse"></strong>
+</p>
+
 <br>
 
 
 <div class="feature-container">
+
+
+<!-- ========================= -->
+<!-- BSc.IT ASSIGNMENTS -->
+<!-- ========================= -->
+
+<div id="bscitAssignments">
 
 
 <div class="feature-card">
@@ -72,21 +83,25 @@ Welcome, <strong id="studentName"></strong>!
 <h3>💻 Web Development</h3>
 
 <p>
-Create a basic HTML and CSS webpage.
+Create a basic responsive webpage using HTML and CSS.
 </p>
 
 <p>
-<strong>Due Date:</strong> 15 September 2026
+<strong>Due Date:</strong>
+15 September 2026
 </p>
 
 <p>
-<strong>Status:</strong> Pending
+<strong>Status:</strong>
+Pending
 </p>
 
 <br>
 
-<button class="login-btn"
-style="border:none;padding:10px 20px;">
+<button
+class="login-btn"
+style="border:none;padding:10px 20px;"
+>
 View Assignment
 </button>
 
@@ -98,21 +113,25 @@ View Assignment
 <h3>🗄️ Database Management</h3>
 
 <p>
-Prepare a short report on database management systems.
+Prepare a short report on Database Management Systems and SQL.
 </p>
 
 <p>
-<strong>Due Date:</strong> 18 September 2026
+<strong>Due Date:</strong>
+18 September 2026
 </p>
 
 <p>
-<strong>Status:</strong> Pending
+<strong>Status:</strong>
+Pending
 </p>
 
 <br>
 
-<button class="login-btn"
-style="border:none;padding:10px 20px;">
+<button
+class="login-btn"
+style="border:none;padding:10px 20px;"
+>
 View Assignment
 </button>
 
@@ -121,24 +140,88 @@ View Assignment
 
 <div class="feature-card">
 
-<h3>📊 Learning Management System</h3>
+<h3>🌐 Data Structures</h3>
+
+<p>
+Explain different types of data structures and their applications.
+</p>
+
+<p>
+<strong>Due Date:</strong>
+22 September 2026
+</p>
+
+<p>
+<strong>Status:</strong>
+Not Started
+</p>
+
+<br>
+
+<button
+class="login-btn"
+style="border:none;padding:10px 20px;"
+>
+View Assignment
+</button>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>⚙️ Operation Management </h3>
+
+<p>
+Prepare notes on Software Development Life Cycle (SDLC).
+</p>
+
+<p>
+<strong>Due Date:</strong>
+25 September 2026
+</p>
+
+<p>
+<strong>Status:</strong>
+Not Started
+</p>
+
+<br>
+
+<button
+class="login-btn"
+style="border:none;padding:10px 20px;"
+>
+View Assignment
+</button>
+
+</div>
+
+
+<div class="feature-card">
+
+<h3>📋 Learning Management System</h3>
 
 <p>
 Write your perception about using LMS in higher education.
 </p>
 
 <p>
-<strong>Due Date:</strong> 20 September 2026
+<strong>Due Date:</strong>
+28 September 2026
 </p>
 
 <p>
-<strong>Status:</strong> Not Started
+<strong>Status:</strong>
+Not Started
 </p>
 
 <br>
 
-<button class="login-btn"
-style="border:none;padding:10px 20px;">
+<button
+class="login-btn"
+style="border:none;padding:10px 20px;"
+>
 View Assignment
 </button>
 
@@ -146,6 +229,32 @@ View Assignment
 
 
 </div>
+
+
+<!-- ========================= -->
+<!-- OTHER COURSES -->
+<!-- ========================= -->
+
+<div
+id="otherCourse"
+style="display:none;"
+>
+
+<div class="feature-card">
+
+<h3>📚 Course Assignments</h3>
+
+<p>
+Assignments for your selected course will be available here.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
 
 <br><br>
 
@@ -165,16 +274,50 @@ const token =
 localStorage.getItem("token");
 
 
+/* Check Login */
+
 if (!token || !student) {
 
-    window.location.href = "login.html";
+    window.location.href =
+    "login.html";
 
 }
 
 
+/* Student Name */
+
 document.getElementById("studentName")
 .textContent = student.name;
 
+
+/* Student Course */
+
+document.getElementById("studentCourse")
+.textContent = student.course;
+
+
+/* Course Based Assignments */
+
+if (student.course === "BSc.IT") {
+
+    document.getElementById("bscitAssignments")
+    .style.display = "block";
+
+    document.getElementById("otherCourse")
+    .style.display = "none";
+
+} else {
+
+    document.getElementById("bscitAssignments")
+    .style.display = "none";
+
+    document.getElementById("otherCourse")
+    .style.display = "block";
+
+}
+
+
+/* Logout */
 
 function logout() {
 
@@ -182,7 +325,8 @@ function logout() {
 
     localStorage.removeItem("student");
 
-    window.location.href = "login.html";
+    window.location.href =
+    "login.html";
 
 }
 
