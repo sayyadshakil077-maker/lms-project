@@ -25,10 +25,29 @@ db.prepare(`
         name TEXT NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
+        course TEXT DEFAULT 'Other',
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 `).run();
 
+
+// Add course column if old database does not have it
+try {
+
+    db.prepare(`
+        ALTER TABLE students
+        ADD COLUMN course TEXT DEFAULT 'Other'
+    `).run();
+
+    console.log("Course column added successfully.");
+
+} catch (error) {
+
+    if (!error.message.includes("duplicate column name")) {
+        console.log(error.message);
+    }
+
+}
 
 // ===============================
 // TEST ROUTE
