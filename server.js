@@ -6,7 +6,7 @@ const Database = require("better-sqlite3");
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const JWT_SECRET = "lms_project_secret_2026";
 
 app.use(cors());
@@ -25,7 +25,6 @@ db.prepare(`
         name TEXT NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        course TEXT NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 `).run();
@@ -179,7 +178,7 @@ app.post("/api/login", async (req, res) => {
                 id: student.id,
                 name: student.name,
                 email: student.email,
-                course: student.course
+                course: student.course 
             }
 
         });
@@ -201,7 +200,7 @@ app.post("/api/login", async (req, res) => {
 // START SERVER
 // ===============================
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
 
     console.log(
         `LMS Backend running at http://localhost:${PORT}`
