@@ -1,199 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Study Materials | EduLMS</title>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-<header>
-
-<nav class="navbar">
-
-<div class="logo">
-Edu<span>LMS</span>
-</div>
-
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Materials | EduLMS</title><link rel="stylesheet" href="style.css">
+<style>.course-title{margin:10px 0 25px;text-align:center} .empty{text-align:center;padding:30px}</style>
+</head><body>
+<header><nav class="navbar">
+<div class="logo">Edu<span>LMS</span></div>
 <div class="nav-links">
-
 <a href="dashboard.html">Dashboard</a>
-
 <a href="profile.html">Profile</a>
-
 <a href="courses.html">Courses</a>
-
 <a href="assignments.html">Assignments</a>
-
 <a href="materials.html">Materials</a>
-
-<button
-onclick="logout()"
-class="login-btn"
-style="border:none;"
->
-Logout
-</button>
-
-</div>
-
-</nav>
-
-</header>
-
-
-<section class="features">
-
-<h1>📖 Study Materials</h1>
-
-<br>
-
-<p>
-Access your learning resources and study materials.
-</p>
-
-<br>
-
-
-<div class="feature-container">
-
-
-<div class="feature-card">
-
-<h3>💻 Web Development</h3>
-
-<p>
-HTML, CSS, JavaScript and basic web development notes.
-</p>
-
-<a href="#">
-View Material
-</a>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>🗄️ Database Management</h3>
-
-<p>
-Database concepts, SQL and database management notes.
-</p>
-
-<a href="#">
-View Material
-</a>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>🖥️ Operating Systems</h3>
-
-<p>
-Process management, scheduling and operating system notes.
-</p>
-
-<a href="#">
-View Material
-</a>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>📊 Data Structures</h3>
-
-<p>
-Arrays, linked lists, stacks, queues and other study resources.
-</p>
-
-<a href="#">
-View Material
-</a>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>🤖 Artificial Intelligence</h3>
-
-<p>
-Introduction to AI, machine learning and intelligent systems.
-</p>
-
-<a href="#">
-View Material
-</a>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>📚 General Study Resources</h3>
-
-<p>
-Additional notes and resources for your academic studies.
-</p>
-
-<a href="#">
-View Material
-</a>
-
-</div>
-
-
-</div>
-
-<br><br>
-
-<a href="dashboard.html" class="btn">
-← Back to Dashboard
-</a>
-
-</section>
-
-
+<button onclick="logout()" class="login-btn" style="border:none;">Logout</button>
+</div></nav></header>
+<section class="features"><h1>📖 Study Materials</h1><br><p>Access your learning resources and study materials.</p><br><div id="content" class="feature-container"></div><br><a href="dashboard.html" class="btn">← Back to Dashboard</a></section>
 <script>
-
-const token =
-localStorage.getItem("token");
-
-const student =
-JSON.parse(localStorage.getItem("student"));
-
-if (!token || !student) {
-
-window.location.href = "login.html";
-
-}
-
-
-function logout() {
-
-localStorage.removeItem("token");
-
-localStorage.removeItem("student");
-
-window.location.href = "login.html";
-
-}
-
-</script>
-
-</body>
-
-</html>
+const token=localStorage.getItem("token");
+const student=JSON.parse(localStorage.getItem("student"));
+if(!token||!student) window.location.href="login.html";
+function logout(){localStorage.removeItem("token");localStorage.removeItem("student");window.location.href="login.html";}
+const data={"BSc.IT": [["💻 Web Development", "HTML, CSS, JavaScript and basic web development notes."], ["🗄️ Database Management", "Database concepts, SQL and database management notes."], ["🖥️ Operating Systems", "Process management, scheduling and operating system notes."], ["📊 Data Structures", "Arrays, linked lists, stacks, queues and other study resources."], ["🤖 Artificial Intelligence", "Introduction to AI, machine learning and intelligent systems."], ["📚 General Study Resources", "Additional notes and resources for your academic studies."]], "BSc.DS": [["Programming Fundamentals", "Programming Fundamentals lecture notes, unit-wise study resources and revision material."], ["Mathematics for Data Science", "Mathematics for Data Science lecture notes, unit-wise study resources and revision material."], ["Statistics", "Statistics lecture notes, unit-wise study resources and revision material."], ["Database Management Systems (DBMS)", "Database Management Systems (DBMS) lecture notes, unit-wise study resources and revision material."], ["Data Structures & Algorithms", "Data Structures & Algorithms lecture notes, unit-wise study resources and revision material."]], "B.Com": [["Financial Accounting", "Financial Accounting lecture notes, unit-wise study resources and revision material."], ["Business Economics", "Business Economics lecture notes, unit-wise study resources and revision material."], ["Business Law", "Business Law lecture notes, unit-wise study resources and revision material."], ["Cost Accounting", "Cost Accounting lecture notes, unit-wise study resources and revision material."], ["Business Communication", "Business Communication lecture notes, unit-wise study resources and revision material."]], "BBI": [["Banking", "Banking lecture notes, unit-wise study resources and revision material."], ["Financial Accounting", "Financial Accounting lecture notes, unit-wise study resources and revision material."], ["Economics", "Economics lecture notes, unit-wise study resources and revision material."], ["Banking Law", "Banking Law lecture notes, unit-wise study resources and revision material."], ["Insurance Management", "Insurance Management lecture notes, unit-wise study resources and revision material."]], "BBA": [["Management", "Management lecture notes, unit-wise study resources and revision material."], ["Financial Accounting", "Financial Accounting lecture notes, unit-wise study resources and revision material."], ["Economics", "Economics lecture notes, unit-wise study resources and revision material."], ["Marketing", "Marketing lecture notes, unit-wise study resources and revision material."], ["HR Management", "HR Management lecture notes, unit-wise study resources and revision material."]], "BAF": [["Financial Accounting", "Financial Accounting lecture notes, unit-wise study resources and revision material."], ["Cost Accounting", "Cost Accounting lecture notes, unit-wise study resources and revision material."], ["Financial Management", "Financial Management lecture notes, unit-wise study resources and revision material."], ["Economics", "Economics lecture notes, unit-wise study resources and revision material."], ["Taxation", "Taxation lecture notes, unit-wise study resources and revision material."]], "BMS": [["📘 Principles of Management", "Management concepts, functions of management, planning, organizing, staffing, directing and controlling."], ["📈 Business Economics", "Demand, supply, elasticity, market structures and basic economic concepts for business decisions."], ["💰 Financial Accounting", "Journal entries, ledger, trial balance, final accounts and basic accounting principles."], ["📣 Marketing Management", "Marketing concepts, market segmentation, product, price, promotion and distribution strategies."], ["👥 Human Resource Management", "Recruitment, selection, training, performance appraisal, motivation and employee development."]], "B.Com": [["💰 Financial Accounting", "Accounting principles, journal, ledger, trial balance, final accounts and basic financial statement concepts."], ["📈 Business Economics", "Demand, supply, elasticity, market structures and economic concepts used in business decisions."], ["⚖️ Business Law", "Contracts, essentials of a valid contract, business agreements, rights and duties of parties."], ["🧾 Cost Accounting", "Cost concepts, classification of costs, cost sheet, material cost, labour cost and overheads."], ["🗣️ Business Communication", "Formal letters, business emails, reports, presentations, communication skills and professional writing."]]};
+const items=data[student.course]||[]; document.getElementById("content").innerHTML=items.map(x=>`<div class="feature-card"><h3>${x[0]}</h3><p>${x[1]}</p><a href="#">View Material</a></div>`).join("")||'<div class="empty"><h3>No study materials available.</h3></div>';
+</script></body></html>

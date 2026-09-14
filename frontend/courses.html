@@ -1,112 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Courses - LMS</title>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-<header>
-
-<nav class="navbar">
-
-<div class="logo">
-Edu<span>LMS</span>
-</div>
-
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Courses | EduLMS</title><link rel="stylesheet" href="style.css">
+<style>.course-title{margin:10px 0 25px;text-align:center} .empty{text-align:center;padding:30px}</style>
+</head><body>
+<header><nav class="navbar">
+<div class="logo">Edu<span>LMS</span></div>
 <div class="nav-links">
-
-<a href="index.html">Home</a>
-<a href="about.html">About LMS</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="profile.html">Profile</a>
 <a href="courses.html">Courses</a>
-<a href="survey.html">Survey</a>
-<a href="contact.html">Contact</a>
+<a href="assignments.html">Assignments</a>
+<a href="materials.html">Materials</a>
+<button onclick="logout()" class="login-btn" style="border:none;">Logout</button>
+</div></nav></header>
+<section class="features"><h1>Available Courses</h1><br>
+<div id="courseHeading" class="course-title"></div>
+<div id="courseContainer" class="feature-container"><div class="feature-card"><h3>BSc.IT</h3><p>Web Development, Database Management, Computer Networks, Software Engineering</p></div><div class="feature-card"><h3>BSc.DS</h3><p>Programming Fundamentals, Mathematics for Data Science, Statistics, Database Management Systems (DBMS), Data Structures &amp; Algorithms</p></div><div class="feature-card"><h3>B.Com</h3><p>Financial Accounting, Business Economics, Business Law, Cost Accounting, Business Communication</p></div><div class="feature-card"><h3>BBI</h3><p>Banking, Financial Accounting, Economics, Banking Law, Insurance Management</p></div><div class="feature-card"><h3>BBA</h3><p>Management, Financial Accounting, Economics, Marketing, HR Management</p></div><div class="feature-card"><h3>BAF</h3><p>Financial Accounting, Cost Accounting, Financial Management, Economics, Taxation</p></div><div class="feature-card"><h3>BMS</h3><p>Principles of Management, Business Economics, Financial Accounting, Marketing Management, Human Resource Management</p></div></div></section>
+<script>
+const token=localStorage.getItem("token");
+const student=JSON.parse(localStorage.getItem("student"));
+if(!token||!student) window.location.href="login.html";
+function logout(){localStorage.removeItem("token");localStorage.removeItem("student");window.location.href="login.html";}
 
-<a href="login.html" class="login-btn">
-Student Login
-</a>
+const courseData = {"BSc.IT": ["Web Development", "Database Management", "Computer Networks", "Software Engineering"], "BSc.DS": ["Programming Fundamentals", "Mathematics for Data Science", "Statistics", "Database Management Systems (DBMS)", "Data Structures & Algorithms"], "B.Com": ["Financial Accounting", "Business Economics", "Business Law", "Cost Accounting", "Business Communication"], "BBI": ["Banking", "Financial Accounting", "Economics", "Banking Law", "Insurance Management"], "BBA": ["Management", "Financial Accounting", "Economics", "Marketing", "HR Management"], "BAF": ["Financial Accounting", "Cost Accounting", "Financial Management", "Economics", "Taxation"], "BMS": ["Principles of Management", "Business Economics", "Financial Accounting", "Marketing Management", "Human Resource Management"], "B.Com": ["Financial Accounting", "Business Economics", "Business Law", "Cost Accounting", "Business Communication"]};
+const course = student.course || "BSc.IT";
 
-</div>
+const box=document.getElementById("courseContainer");
+if(student && student.course && courseData[student.course]){
+ document.getElementById("courseHeading").innerHTML="<h2>My Course: "+student.course+"</h2>";
+ box.innerHTML=courseData[student.course].map(s=>`<div class="feature-card"><h3>${s}</h3><p>Course subject for ${student.course}.</p></div>`).join("");
+}
 
-</nav>
-
-</header>
-
-
-<section class="features">
-
-<h1>Available Courses</h1>
-
-<br>
-
-<div class="feature-container">
-
-<div class="feature-card">
-
-<h3>Web Development</h3>
-
-<p>
-HTML, CSS, JavaScript and modern web development.
-</p>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>Database Management</h3>
-
-<p>
-Introduction to databases, SQL and database systems.
-</p>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>Computer Networks</h3>
-
-<p>
-Networking concepts, protocols and communication.
-</p>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>Software Engineering</h3>
-
-<p>
-Software development processes and methodologies.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<footer>
-
-<p>
-© 2026 LMS Higher Education Project
-</p>
-
-</footer>
-
-</body>
-
-</html>
+</script></body></html>

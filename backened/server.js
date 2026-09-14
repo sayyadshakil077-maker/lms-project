@@ -19,15 +19,39 @@ app.use(express.json());
 
 const db = new Database("lms.db");
 
+// Create students table
 db.prepare(`
     CREATE TABLE IF NOT EXISTS students (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
+        course TEXT DEFAULT 'Other',
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 `).run();
+
+
+// ===============================
+// ADD COURSE COLUMN IF MISSING
+// ===============================
+
+try {
+
+    db.prepare(`
+        ALTER TABLE students
+        ADD COLUMN course TEXT DEFAULT 'Other'
+    `).run();
+
+    console.log("Course column added.");
+
+} catch (error) {
+
+    if (!error.message.includes("duplicate column name")) {
+        console.log("Course column already exists.");
+    }
+
+}
 
 
 // ===============================
@@ -51,9 +75,15 @@ app.post("/api/register", async (req, res) => {
 
     try {
 
-        const { name, email, password } = req.body;
+        const {
+            name,
+            email,
+            password,
+            course
+        } = req.body;
 
-        if (!name || !email || !password) {
+        // Check all fields
+        if (!name || !email || !password || !course) {
 
             return res.status(400).json({
                 message: "Please fill all fields."
@@ -61,6 +91,8 @@ app.post("/api/register", async (req, res) => {
 
         }
 
+
+        // Check existing email
         const existingStudent = db
             .prepare("SELECT * FROM students WHERE email = ?")
             .get(email);
@@ -73,19 +105,26 @@ app.post("/api/register", async (req, res) => {
 
         }
 
+
+        // Hash password
         const hashedPassword =
             await bcrypt.hash(password, 10);
 
+
+        // Save student
         const result = db.prepare(`
             INSERT INTO students
-            (name, email, password)
-            VALUES (?, ?, ?)
+            (name, email, password, course)
+            VALUES (?, ?, ?, ?)
         `).run(
             name,
             email,
-            hashedPassword
+            hashedPassword,
+            course
         );
 
+
+        // Success response
         res.status(201).json({
 
             message: "Student registered successfully.",
@@ -93,14 +132,15 @@ app.post("/api/register", async (req, res) => {
             student: {
                 id: result.lastInsertRowid,
                 name: name,
-                email: email
+                email: email,
+                course: course
             }
 
         });
 
     } catch (error) {
 
-        console.error(error);
+        console.error("REGISTER ERROR:", error);
 
         res.status(500).json({
             message: "Registration failed."
@@ -119,7 +159,11 @@ app.post("/api/login", async (req, res) => {
 
     try {
 
-        const { email, password } = req.body;
+        const {
+            email,
+            password
+        } = req.body;
+
 
         if (!email || !password) {
 
@@ -129,9 +173,12 @@ app.post("/api/login", async (req, res) => {
 
         }
 
+
+        // Find student
         const student = db
             .prepare("SELECT * FROM students WHERE email = ?")
             .get(email);
+
 
         if (!student) {
 
@@ -141,11 +188,14 @@ app.post("/api/login", async (req, res) => {
 
         }
 
+
+        // Check password
         const passwordMatch =
             await bcrypt.compare(
                 password,
                 student.password
             );
+
 
         if (!passwordMatch) {
 
@@ -155,6 +205,8 @@ app.post("/api/login", async (req, res) => {
 
         }
 
+
+        // Create JWT token
         const token = jwt.sign(
             {
                 id: student.id,
@@ -166,6 +218,8 @@ app.post("/api/login", async (req, res) => {
             }
         );
 
+
+        // Login success
         res.json({
 
             message: "Login successful.",
@@ -175,14 +229,15 @@ app.post("/api/login", async (req, res) => {
             student: {
                 id: student.id,
                 name: student.name,
-                email: student.email
+                email: student.email,
+                course: student.course || "Other"
             }
 
         });
 
     } catch (error) {
 
-        console.error(error);
+        console.error("LOGIN ERROR:", error);
 
         res.status(500).json({
             message: "Login failed."
@@ -200,7 +255,7 @@ app.post("/api/login", async (req, res) => {
 app.listen(PORT, "0.0.0.0", () => {
 
     console.log(
-        `LMS Backend running at http://localhost:${PORT}`
+        `LMS Backend running on port ${PORT}`
     );
 
 });

@@ -1,193 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Assignments | EduLMS</title>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-<header>
-
-<nav class="navbar">
-
-<div class="logo">
-Edu<span>LMS</span>
-</div>
-
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignments | EduLMS</title><link rel="stylesheet" href="style.css">
+<style>.course-title{margin:10px 0 25px;text-align:center} .empty{text-align:center;padding:30px}</style>
+</head><body>
+<header><nav class="navbar">
+<div class="logo">Edu<span>LMS</span></div>
 <div class="nav-links">
-
 <a href="dashboard.html">Dashboard</a>
-
 <a href="profile.html">Profile</a>
-
 <a href="courses.html">Courses</a>
-
 <a href="assignments.html">Assignments</a>
-
 <a href="materials.html">Materials</a>
-
-<button
-onclick="logout()"
-class="login-btn"
-style="border:none;"
->
-Logout
-</button>
-
-</div>
-
-</nav>
-
-</header>
-
-
-<section class="features">
-
-<h1>📝 Assignments</h1>
-
-<br>
-
-<p>
-Welcome, <strong id="studentName"></strong>!
-</p>
-
-<br>
-
-
-<div class="feature-container">
-
-
-<div class="feature-card">
-
-<h3>💻 Web Development</h3>
-
-<p>
-Create a basic HTML and CSS webpage.
-</p>
-
-<p>
-<strong>Due Date:</strong> 15 September 2026
-</p>
-
-<p>
-<strong>Status:</strong> Pending
-</p>
-
-<br>
-
-<button class="login-btn"
-style="border:none;padding:10px 20px;">
-View Assignment
-</button>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>🗄️ Database Management</h3>
-
-<p>
-Prepare a short report on database management systems.
-</p>
-
-<p>
-<strong>Due Date:</strong> 18 September 2026
-</p>
-
-<p>
-<strong>Status:</strong> Pending
-</p>
-
-<br>
-
-<button class="login-btn"
-style="border:none;padding:10px 20px;">
-View Assignment
-</button>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>📊 Learning Management System</h3>
-
-<p>
-Write your perception about using LMS in higher education.
-</p>
-
-<p>
-<strong>Due Date:</strong> 20 September 2026
-</p>
-
-<p>
-<strong>Status:</strong> Not Started
-</p>
-
-<br>
-
-<button class="login-btn"
-style="border:none;padding:10px 20px;">
-View Assignment
-</button>
-
-</div>
-
-
-</div>
-
-<br><br>
-
-<a href="dashboard.html">
-← Back to Dashboard
-</a>
-
-</section>
-
-
+<button onclick="logout()" class="login-btn" style="border:none;">Logout</button>
+</div></nav></header>
+<section class="features"><h1>📝 Assignments</h1><br><p>Welcome, <strong id="studentName"></strong>!</p><br><div id="content" class="feature-container"></div><br><a href="dashboard.html">← Back to Dashboard</a></section>
 <script>
-
-const student =
-JSON.parse(localStorage.getItem("student"));
-
-const token =
-localStorage.getItem("token");
-
-
-if (!token || !student) {
-
-    window.location.href = "login.html";
-
-}
-
-
-document.getElementById("studentName")
-.textContent = student.name;
-
-
-function logout() {
-
-    localStorage.removeItem("token");
-
-    localStorage.removeItem("student");
-
-    window.location.href = "login.html";
-
-}
-
-</script>
-
-</body>
-
-</html>
+const token=localStorage.getItem("token");
+const student=JSON.parse(localStorage.getItem("student"));
+if(!token||!student) window.location.href="login.html";
+function logout(){localStorage.removeItem("token");localStorage.removeItem("student");window.location.href="login.html";}
+const data={"BSc.IT": [["💻 Web Development", "Create a basic HTML and CSS webpage.", "15 September 2026", "Pending"], ["🗄️ Database Management", "Prepare a short report on database management systems.", "18 September 2026", "Pending"], ["📊 Learning Management System", "Write your perception about using LMS in higher education.", "20 September 2026", "Not Started"]], "BSc.DS": [["💻 Programming Fundamentals", "Write a Python program demonstrating variables, conditions and loops.", "18 September 2026", "Pending"], ["📐 Mathematics for Data Science", "Solve a worksheet on matrices, functions and basic probability.", "20 September 2026", "Pending"], ["📊 Statistics", "Prepare a short report explaining mean, median, mode and standard deviation.", "22 September 2026", "Not Started"], ["🗄️ Database Management Systems (DBMS)", "Create SQL queries for a student database and explain the results.", "24 September 2026", "Pending"], ["🧮 Data Structures & Algorithms", "Implement and explain searching and sorting algorithms.", "26 September 2026", "Not Started"]], "B.Com": [["💰 Financial Accounting", "Prepare journal entries and a trial balance for the given transactions.", "18 September 2026", "Pending"], ["📈 Business Economics", "Write a short note on demand, supply and market equilibrium.", "20 September 2026", "Pending"], ["⚖️ Business Law", "Explain the essential elements of a valid contract with examples.", "22 September 2026", "Not Started"], ["🧾 Cost Accounting", "Prepare a basic cost sheet using the given cost information.", "24 September 2026", "Pending"], ["🗣️ Business Communication", "Draft a formal business email and a short business letter.", "26 September 2026", "Not Started"]], "BBI": [["🏦 Banking", "Explain the major functions of commercial banks.", "18 September 2026", "Pending"], ["💰 Financial Accounting", "Prepare a short practical assignment on banking-related accounting entries.", "20 September 2026", "Pending"], ["📈 Economics", "Explain inflation, its causes and its effects on the economy.", "22 September 2026", "Not Started"], ["⚖️ Banking Law", "Write a note on important legal provisions related to banking.", "24 September 2026", "Pending"], ["🛡️ Insurance Management", "Explain the basic principles and types of insurance.", "26 September 2026", "Not Started"]], "BBA": [["👔 Management", "Explain the functions of management with suitable examples.", "18 September 2026", "Pending"], ["💰 Financial Accounting", "Prepare journal entries and a trial balance for the given transactions.", "20 September 2026", "Pending"], ["📈 Economics", "Write a short note on demand, supply and market equilibrium.", "22 September 2026", "Not Started"], ["📣 Marketing", "Prepare a short marketing plan for a student-focused product.", "24 September 2026", "Pending"], ["👥 HR Management", "Explain recruitment, selection and employee training.", "26 September 2026", "Not Started"]], "BAF": [["💰 Financial Accounting", "Prepare journal entries and final accounts for the given transactions.", "18 September 2026", "Pending"], ["🧾 Cost Accounting", "Prepare a cost sheet and explain the major cost components.", "20 September 2026", "Pending"], ["📊 Financial Management", "Explain the objectives and importance of financial management.", "22 September 2026", "Not Started"], ["📈 Economics", "Explain inflation and its impact on business decisions.", "24 September 2026", "Pending"], ["🧮 Taxation", "Prepare a short note on basic concepts of income tax.", "26 September 2026", "Not Started"]], "BMS": [["📘 Principles of Management", "Explain the major functions of management and their importance in an organization.", "18 September 2026", "Pending"], ["📈 Business Economics", "Prepare a short report on demand, supply and market equilibrium with suitable examples.", "20 September 2026", "Pending"], ["💰 Financial Accounting", "Prepare journal entries and a trial balance for a set of business transactions.", "22 September 2026", "Not Started"], ["📣 Marketing Management", "Create a basic marketing plan for a student-focused product, including target customers and promotion.", "24 September 2026", "Pending"], ["👥 Human Resource Management", "Explain recruitment, selection, training and performance appraisal in an organization.", "26 September 2026", "Not Started"]], "B.Com": [["💰 Financial Accounting", "Prepare journal entries, ledger accounts and a trial balance for a given set of business transactions.", "18 September 2026", "Pending"], ["📈 Business Economics", "Explain the factors affecting demand and supply and illustrate market equilibrium with suitable examples.", "20 September 2026", "Pending"], ["⚖️ Business Law", "Prepare a short report explaining the essentials of a valid contract with practical business examples.", "22 September 2026", "Not Started"], ["🧾 Cost Accounting", "Prepare a basic cost sheet showing direct material, direct labour, overheads and total cost.", "24 September 2026", "Pending"], ["🗣️ Business Communication", "Write a formal business email and prepare a short professional presentation outline.", "26 September 2026", "Not Started"]]};
+document.getElementById("studentName").textContent=student.name;
+const items=data[student.course]||[];
+document.getElementById("content").innerHTML=items.map(x=>`<div class="feature-card"><h3>${x[0]}</h3><p>${x[1]}</p><p><strong>Due Date:</strong> ${x[2]}</p><p><strong>Status:</strong> ${x[3]}</p><br><button class="login-btn" style="border:none;padding:10px 20px;">View Assignment</button></div>`).join("")||'<div class="empty"><h3>No assignments available.</h3></div>';
+</script></body></html>

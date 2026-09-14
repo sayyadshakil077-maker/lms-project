@@ -1,195 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Attendance | EduLMS</title>
-
-<link rel="stylesheet" href="style.css">
-
-<style>
-
-.attendance-table {
-    width: 100%;
-    max-width: 900px;
-    margin: 25px auto;
-    border-collapse: collapse;
-    background: white;
-}
-
-.attendance-table th,
-.attendance-table td {
-    padding: 14px;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
-.attendance-table th {
-    background: #2563eb;
-    color: white;
-}
-
-.good {
-    color: green;
-    font-weight: bold;
-}
-
-.warning {
-    color: orange;
-    font-weight: bold;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-
-<nav class="navbar">
-
-<div class="logo">
-Edu<span>LMS</span>
-</div>
-
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance | EduLMS</title><link rel="stylesheet" href="style.css">
+<style>.attendance-table{width:100%;max-width:900px;margin:25px auto;border-collapse:collapse;background:white}.attendance-table th,.attendance-table td{padding:14px;border:1px solid #ddd;text-align:center}.attendance-table th{background:#2563eb;color:white}.good{color:green;font-weight:bold}.warning{color:orange;font-weight:bold}.course-title{margin:10px 0 25px;text-align:center} .empty{text-align:center;padding:30px}</style>
+</head><body>
+<header><nav class="navbar">
+<div class="logo">Edu<span>LMS</span></div>
 <div class="nav-links">
-
 <a href="dashboard.html">Dashboard</a>
-
 <a href="profile.html">Profile</a>
-
 <a href="courses.html">Courses</a>
-
 <a href="assignments.html">Assignments</a>
-
 <a href="materials.html">Materials</a>
-
-<button
-onclick="logout()"
-class="login-btn"
-style="border:none;"
->
-Logout
-</button>
-
-</div>
-
-</nav>
-
-</header>
-
-
-<section class="features">
-
-<h1>📊 Attendance</h1>
-
-<br>
-
-<p>
-Check your attendance for each subject.
-</p>
-
-
-<table class="attendance-table">
-
-<thead>
-
-<tr>
-<th>Subject</th>
-<th>Total Classes</th>
-<th>Present</th>
-<th>Absent</th>
-<th>Attendance</th>
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-<td>Web Development</td>
-<td>40</td>
-<td>35</td>
-<td>5</td>
-<td class="good">87.5%</td>
-</tr>
-
-<tr>
-<td>Database Management</td>
-<td>35</td>
-<td>30</td>
-<td>5</td>
-<td class="good">85.7%</td>
-</tr>
-
-<tr>
-<td>Field Project</td>
-<td>30</td>
-<td>30</td>
-<td>0</td>
-<td class="good">100%</td>
-</tr>
-
-<tr>
-<td>Operating System</td>
-<td>30</td>
-<td>24</td>
-<td>6</td>
-<td class="good">80%</td>
-</tr>
-
-<tr>
-<td>Data Structures</td>
-<td>32</td>
-<td>24</td>
-<td>8</td>
-<td class="warning">75%</td>
-</tr>
-
-</tbody>
-
-</table>
-
-
-<br>
-
-<a href="dashboard.html" class="btn">
-← Back to Dashboard
-</a>
-
-</section>
-
-
+<button onclick="logout()" class="login-btn" style="border:none;">Logout</button>
+</div></nav></header>
+<section class="features"><h1>📊 Attendance</h1><br><p>Check your attendance for each subject.</p>
+<table class="attendance-table"><thead><tr><th>Subject</th><th>Total Classes</th><th>Present</th><th>Absent</th><th>Attendance</th></tr></thead>
+<tbody id="attendanceBody"></tbody></table><br><a href="dashboard.html" class="btn">← Back to Dashboard</a></section>
 <script>
-
-const student =
-JSON.parse(localStorage.getItem("student"));
-
-const token =
-localStorage.getItem("token");
-
-if (!token || !student) {
-
-    window.location.href = "login.html";
-
-}
-
-
-function logout() {
-
-    localStorage.removeItem("token");
-
-    localStorage.removeItem("student");
-
-    window.location.href = "login.html";
-
-}
-
-</script>
-
-</body>
-
-</html>
+const token=localStorage.getItem("token");
+const student=JSON.parse(localStorage.getItem("student"));
+if(!token||!student) window.location.href="login.html";
+function logout(){localStorage.removeItem("token");localStorage.removeItem("student");window.location.href="login.html";}
+const data={"BSc.IT": [["Web Development", 40, 35], ["Database Management", 35, 30], ["Field Project", 30, 30], ["Operating System", 30, 24], ["Data Structures", 32, 24]], "BSc.DS": [["Programming Fundamentals", 40, 35], ["Mathematics for Data Science", 38, 32], ["Statistics", 36, 31], ["Database Management Systems (DBMS)", 35, 30], ["Data Structures & Algorithms", 40, 33]], "B.Com": [["Financial Accounting", 40, 35], ["Business Economics", 38, 32], ["Business Law", 36, 31], ["Cost Accounting", 35, 29], ["Business Communication", 34, 30]], "BBI": [["Banking", 40, 35], ["Financial Accounting", 38, 33], ["Economics", 36, 30], ["Banking Law", 34, 29], ["Insurance Management", 35, 31]], "BBA": [["Management", 40, 36], ["Financial Accounting", 38, 32], ["Economics", 36, 31], ["Marketing", 35, 30], ["HR Management", 34, 29]], "BAF": [["Financial Accounting", 40, 35], ["Cost Accounting", 38, 32], ["Financial Management", 36, 31], ["Economics", 35, 30], ["Taxation", 34, 29]], "BMS": [["Principles of Management", 40, 36], ["Business Economics", 38, 32], ["Financial Accounting", 36, 31], ["Marketing Management", 35, 30], ["Human Resource Management", 34, 29]], "B.Com": [["Financial Accounting", 40, 35], ["Business Economics", 38, 33], ["Business Law", 36, 31], ["Cost Accounting", 35, 29], ["Business Communication", 34, 30]]};
+const rows=data[student.course]||[]; document.getElementById("attendanceBody").innerHTML=rows.map(x=>{let pct=(x[2]/x[1]*100).toFixed(1).replace(".0",""); let cls=parseFloat(pct)>=80?"good":"warning"; return `<tr><td>${x[0]}</td><td>${x[1]}</td><td>${x[2]}</td><td>${x[1]-x[2]}</td><td class="${cls}">${pct}%</td></tr>`}).join("")||'<tr><td colspan="5">No attendance data available.</td></tr>';
+</script></body></html>

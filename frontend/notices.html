@@ -1,161 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>LMS Notices</title>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-<header>
-
-<nav class="navbar">
-
-<div class="logo">
-Edu<span>LMS</span>
-</div>
-
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMS Notices | EduLMS</title><link rel="stylesheet" href="style.css">
+<style>.course-title{margin:10px 0 25px;text-align:center} .empty{text-align:center;padding:30px}</style>
+</head><body>
+<header><nav class="navbar">
+<div class="logo">Edu<span>LMS</span></div>
 <div class="nav-links">
-
 <a href="dashboard.html">Dashboard</a>
-
 <a href="profile.html">Profile</a>
-
 <a href="courses.html">Courses</a>
-
 <a href="assignments.html">Assignments</a>
-
 <a href="materials.html">Materials</a>
-
-<button
-onclick="logout()"
-class="login-btn"
-style="border:none;"
->
-Logout
-</button>
-
-</div>
-
-</nav>
-
-</header>
-
-
-<section class="features">
-
-<h1>📢 Important Notices</h1>
-
-<br>
-
-<p>
-Stay updated with important LMS and college announcements.
-</p>
-
-<br>
-
-
-<div class="feature-container">
-
-
-<div class="feature-card">
-
-<h3>📚 Semester Examination</h3>
-
-<p>
-Students are advised to check the examination schedule
-and prepare accordingly.
-</p>
-
-<small>
-Posted by LMS Administration
-</small>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>📝 Assignment Submission</h3>
-
-<p>
-Please submit your pending assignments before the
-specified deadline.
-</p>
-
-<small>
-Posted by Faculty
-</small>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>🎓 LMS Survey</h3>
-
-<p>
-Students are requested to participate in the LMS
-Perception Survey.
-</p>
-
-<a href="survey.html">
-Take Survey
-</a>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>📢 College Announcement</h3>
-
-<p>
-Check the LMS regularly for new academic announcements,
-events and updates.
-</p>
-
-<small>
-Posted by College Administration
-</small>
-
-</div>
-
-
-</div>
-
-<br>
-
-<a href="dashboard.html">
-← Back to Dashboard
-</a>
-
-</section>
-
-
+<button onclick="logout()" class="login-btn" style="border:none;">Logout</button>
+</div></nav></header>
+<section class="features"><h1>📢 Important Notices</h1><br><p>Stay updated with important LMS and college announcements.</p><br><div id="content" class="feature-container"></div><br><a href="dashboard.html">← Back to Dashboard</a></section>
 <script>
-
-function logout() {
-
-    localStorage.removeItem("token");
-
-    localStorage.removeItem("student");
-
-    window.location.href = "login.html";
-
-}
-
-</script>
-
-</body>
-
-</html>
+const token=localStorage.getItem("token");
+const student=JSON.parse(localStorage.getItem("student"));
+if(!token||!student) window.location.href="login.html";
+function logout(){localStorage.removeItem("token");localStorage.removeItem("student");window.location.href="login.html";}
+const data={"BSc.IT": [["📚 Semester Examination", "BSc.IT students are advised to check the examination schedule and prepare accordingly.", "Posted by LMS Administration"], ["📝 Assignment Submission", "Please submit your pending assignments before the specified deadline.", "Posted by Faculty"], ["🎓 LMS Survey", "Students are requested to participate in the LMS Perception Survey.", "Posted by LMS Administration"], ["📢 Course Announcement", "Important academic updates and activities for BSc.IT students will be posted here.", "Posted by College Administration"]], "BSc.DS": [["📚 Semester Examination", "BSc.DS students are advised to check the examination schedule and prepare accordingly.", "Posted by LMS Administration"], ["📝 Assignment Submission", "Please submit your pending assignments before the specified deadline.", "Posted by Faculty"], ["🎓 LMS Survey", "Students are requested to participate in the LMS Perception Survey.", "Posted by LMS Administration"], ["📢 Course Announcement", "Important academic updates and activities for BSc.DS students will be posted here.", "Posted by College Administration"]], "B.Com": [["📚 Semester Examination", "B.Com students are advised to check the examination schedule and prepare accordingly.", "Posted by LMS Administration"], ["📝 Assignment Submission", "Please submit your pending assignments before the specified deadline.", "Posted by Faculty"], ["🎓 LMS Survey", "Students are requested to participate in the LMS Perception Survey.", "Posted by LMS Administration"], ["📢 Course Announcement", "Important academic updates and activities for B.Com students will be posted here.", "Posted by College Administration"]], "BBI": [["📚 Semester Examination", "BBI students are advised to check the examination schedule and prepare accordingly.", "Posted by LMS Administration"], ["📝 Assignment Submission", "Please submit your pending assignments before the specified deadline.", "Posted by Faculty"], ["🎓 LMS Survey", "Students are requested to participate in the LMS Perception Survey.", "Posted by LMS Administration"], ["📢 Course Announcement", "Important academic updates and activities for BBI students will be posted here.", "Posted by College Administration"]], "BBA": [["📚 Semester Examination", "BBA students are advised to check the examination schedule and prepare accordingly.", "Posted by LMS Administration"], ["📝 Assignment Submission", "Please submit your pending assignments before the specified deadline.", "Posted by Faculty"], ["🎓 LMS Survey", "Students are requested to participate in the LMS Perception Survey.", "Posted by LMS Administration"], ["📢 Course Announcement", "Important academic updates and activities for BBA students will be posted here.", "Posted by College Administration"]], "BAF": [["📚 Semester Examination", "BAF students are advised to check the examination schedule and prepare accordingly.", "Posted by LMS Administration"], ["📝 Assignment Submission", "Please submit your pending assignments before the specified deadline.", "Posted by Faculty"], ["🎓 LMS Survey", "Students are requested to participate in the LMS Perception Survey.", "Posted by LMS Administration"], ["📢 Course Announcement", "Important academic updates and activities for BAF students will be posted here.", "Posted by College Administration"]], "BMS": [["📚 Semester Examination", "BMS students are advised to check the semester examination schedule and complete their preparation on time.", "Posted by LMS Administration"], ["📝 Assignment Submission", "BMS students must submit pending assignments before the respective deadlines shown on the Assignments page.", "Posted by Faculty"], ["🎓 LMS Survey", "BMS students are requested to participate in the Student Perception of Learning Management Systems survey.", "Posted by LMS Administration"], ["📢 BMS Course Announcement", "Important academic updates, lectures and activities for BMS students will be posted on the LMS.", "Posted by College Administration"]], "B.Com": [["📚 Semester Examination", "B.Com students are advised to check the semester examination schedule and complete their preparation on time.", "Posted by LMS Administration"], ["📝 Assignment Submission", "B.Com students must submit pending assignments before the deadlines shown on the Assignments page.", "Posted by Faculty"], ["🎓 LMS Survey", "B.Com students are requested to participate in the Student Perception of Learning Management Systems survey.", "Posted by LMS Administration"], ["📢 B.Com Course Announcement", "Important academic updates, lectures and activities for B.Com students will be posted on the LMS.", "Posted by College Administration"]]};
+const items=data[student.course]||[]; document.getElementById("content").innerHTML=items.map(x=>`<div class="feature-card"><h3>${x[0]}</h3><p>${x[1]}</p><small>${x[2]}</small>${x[0].includes("LMS Survey")?'<br><br><a href="survey.html">Take Survey</a>':''}</div>`).join("")||'<div class="empty"><h3>No notices available.</h3></div>';
+</script></body></html>
